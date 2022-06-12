@@ -2,7 +2,7 @@ package com.summergroup.portal.service;
 
 import com.summergroup.portal.domain.User;
 import com.summergroup.portal.dto.RegistrationRequest;
-import com.summergroup.portal.dto.UserDto;
+import com.summergroup.portal.dto.UserDTO;
 import com.summergroup.portal.exception.ResourceNotFoundException;
 import com.summergroup.portal.exception.ResourcesAlreadyExistsException;
 import com.summergroup.portal.mapper.UserMapper;
@@ -31,20 +31,20 @@ public class UserService {
         this.roleService = roleService;
     }
 
-    public List<UserDto> getUsers() {
+    public List<UserDTO> getUsers() {
         log.debug("Getting list of users");
         List<User> userList = userRepository.findAll();
         return userMapper.toDtoList(userList);
     }
 
-    public UserDto getUserByUsername(String username) {
+    public UserDTO getUserByUsername(String username) {
         log.debug("Getting user by username", username);
         User user = userRepository.findByUsername(username).orElseThrow(ResourceNotFoundException::new);
         return userMapper.toDto(user);
     }
 
     @Transactional
-    public UserDto saveUser(RegistrationRequest registrationRequest) {
+    public UserDTO create(RegistrationRequest registrationRequest) {
         User user = userMapper.registrationRequestToEntity(registrationRequest);
         user.setRoles(Set.of(roleService.getByName("ROLE_USER")));
         user.setPassword(passwordEncoder.encode(user.getPassword()));

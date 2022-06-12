@@ -36,6 +36,11 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     private long jwtExpired;
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    public CustomAuthenticationFilter(@Lazy AuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
+    }
+
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         String username = request.getParameter("username");

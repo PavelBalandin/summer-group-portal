@@ -1,4 +1,4 @@
-package com.summergroup.portal.config;
+package com.summergroup.portal.mapper;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/changeset/create-database-tables.sql
+  - include:
+      file: db/changelog/changeset/set-default-data.sql
+  - include:
+      file: db/changelog/changeset/set-test-data.sql
