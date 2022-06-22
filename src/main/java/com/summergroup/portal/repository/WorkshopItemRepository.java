@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface WorkshopItemRepository extends JpaRepository<WorkshopItem, Long> {
     Optional<WorkshopItem> findByName(String name);
+    Optional<WorkshopItem> findBySteamId(String id);
 }

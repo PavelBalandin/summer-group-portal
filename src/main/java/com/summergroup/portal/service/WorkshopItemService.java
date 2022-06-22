@@ -33,6 +33,18 @@ public class WorkshopItemService {
         return itemPage.map(workshopMapper::toDTO);
     }
 
+    public WorkshopItemDTO getById(Long id) {
+        log.info("Getting workshopItem by Id");
+        WorkshopItem workshopItem = workshopItemRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        return workshopMapper.toDTO(workshopItem);
+    }
+
+    public WorkshopItemDTO getBySteamId(String id) {
+        log.info("Getting workshopItem by Id");
+        WorkshopItem workshopItem = workshopItemRepository.findBySteamId(id).orElseThrow(ResourceNotFoundException::new);
+        return workshopMapper.toDTO(workshopItem);
+    }
+
     public WorkshopItemDTO create(WorkshopItemDTO workshopItemDTO) {
         log.info("Creating item with name: {}", workshopItemDTO.getName());
         WorkshopItem workshopItem = workshopItemRepository.save(workshopMapper.toEntity(workshopItemDTO));
@@ -66,5 +78,4 @@ public class WorkshopItemService {
         WorkshopItem workshopItemFromDB = workshopItemRepository.findByName(name).orElseThrow(ResourceNotFoundException::new);
         workshopItemRepository.delete(workshopItemFromDB);
     }
-
 }

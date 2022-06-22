@@ -44,6 +44,7 @@ CREATE TABLE authors
 CREATE TABLE workshop_items
 (
     id             BIGSERIAL    NOT NULL PRIMARY KEY,
+    steam_id       VARCHAR(255) NOT NULL,
     name           VARCHAR(255) NOT NULL,
     url            VARCHAR(255) NOT NULL,
     description    TEXT,

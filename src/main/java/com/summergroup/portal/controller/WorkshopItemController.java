@@ -28,6 +28,16 @@ public class WorkshopItemController {
         return new ResponseEntity<>(workshopItemService.getPaginated(page, size, sort, order), HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<WorkshopItemDTO> getWorkshopItemById(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(workshopItemService.getById(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/steam/{id}")
+    public ResponseEntity<WorkshopItemDTO> getWorkshopItemBySteamId(@PathVariable("id") String id) {
+        return new ResponseEntity<>(workshopItemService.getBySteamId(id), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<WorkshopItemDTO> create(@RequestBody WorkshopItemDTO workshopItemDTO) {
         return new ResponseEntity<>(workshopItemService.create(workshopItemDTO), HttpStatus.CREATED);

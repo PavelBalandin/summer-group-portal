@@ -21,6 +21,7 @@ public class WorkshopItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String steamId;
     private String name;
     private String url;
     @Column(columnDefinition = "TEXT")
