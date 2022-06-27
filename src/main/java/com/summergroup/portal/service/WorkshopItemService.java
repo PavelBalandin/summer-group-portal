@@ -12,6 +12,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @Service
 public class WorkshopItemService {
@@ -30,6 +32,12 @@ public class WorkshopItemService {
     public Page<WorkshopItemDTO> getPaginated(int page, int size, String sort, String order) {
         log.info("Getting page with items");
         Page<WorkshopItem> itemPage = workshopItemRepository.findAll(PageRequest.of(page, size, Sort.by(Sort.Direction.valueOf(order), sort)));
+        return itemPage.map(workshopMapper::toDTO);
+    }
+
+    public Page<WorkshopItemDTO> getPaginatedByTags(List<Long> tags, int page, int size, String sort, String order) {
+        log.info("Getting page with items by tags");
+        Page<WorkshopItem> itemPage = workshopItemRepository.findAllByTagsIdIn(tags, PageRequest.of(page, size, Sort.by(Sort.Direction.valueOf(order), sort)));
         return itemPage.map(workshopMapper::toDTO);
     }
 

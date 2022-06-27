@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("api/v1/workshop-items")
@@ -26,6 +28,17 @@ public class WorkshopItemController {
             @RequestParam(defaultValue = "ASC") String order
     ) {
         return new ResponseEntity<>(workshopItemService.getPaginated(page, size, sort, order), HttpStatus.OK);
+    }
+
+    @GetMapping("/tags")
+    public ResponseEntity<Page<WorkshopItemDTO>> getWorkshopItemsByTags(
+            @RequestParam List<Long> tags,
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "10") Integer size,
+            @RequestParam(defaultValue = "id") String sort,
+            @RequestParam(defaultValue = "ASC") String order
+    ) {
+        return new ResponseEntity<>(workshopItemService.getPaginatedByTags(tags, page, size, sort, order), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -64,5 +77,5 @@ public class WorkshopItemController {
         workshopItemService.delete(name);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-    
+
 }
