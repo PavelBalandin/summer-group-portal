@@ -41,6 +41,12 @@ public class WorkshopItemService {
         return itemPage.map(workshopMapper::toDTO);
     }
 
+    public Page<WorkshopItemDTO> getPaginatedBySimilarName(String name, int page, int size, String sort, String order) {
+        log.info("Getting page with items by tags");
+        Page<WorkshopItem> itemPage = workshopItemRepository.findByNameIgnoreCaseContaining(name, PageRequest.of(page, size, Sort.by(Sort.Direction.valueOf(order), sort)));
+        return itemPage.map(workshopMapper::toDTO);
+    }
+
     public WorkshopItemDTO getById(Long id) {
         log.info("Getting workshopItem by Id");
         WorkshopItem workshopItem = workshopItemRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
