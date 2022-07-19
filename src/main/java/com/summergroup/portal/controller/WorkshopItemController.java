@@ -30,9 +30,9 @@ public class WorkshopItemController {
         return new ResponseEntity<>(workshopItemService.getPaginated(page, size, sort, order), HttpStatus.OK);
     }
 
-    @GetMapping("/tags")
+    @PostMapping("/tags")
     public ResponseEntity<Page<WorkshopItemDTO>> getWorkshopItemsByTags(
-            @RequestParam List<Long> tags,
+            @RequestBody List<Long> tags,
             @RequestParam(defaultValue = "0") Integer page,
             @RequestParam(defaultValue = "10") Integer size,
             @RequestParam(defaultValue = "id") String sort,
