@@ -37,7 +37,7 @@ public class WorkshopItemService {
 
     public Page<WorkshopItemDTO> getPaginatedByTags(List<Long> tags, int page, int size, String sort, String order) {
         log.info("Getting page with items by tags");
-        Page<WorkshopItem> itemPage = workshopItemRepository.findAllByTagsIdIn(tags, PageRequest.of(page, size, Sort.by(Sort.Direction.valueOf(order), sort)));
+        Page<WorkshopItem> itemPage = workshopItemRepository.findDistinctAllByTagsIdIn(tags, PageRequest.of(page, size, Sort.by(Sort.Direction.valueOf(order), sort)));
         return itemPage.map(workshopMapper::toDTO);
     }
 

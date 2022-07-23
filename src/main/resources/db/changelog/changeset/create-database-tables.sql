@@ -23,8 +23,11 @@ CREATE TABLE roles
 ----------------------------------------------------------------
 CREATE TABLE tags
 (
-    id   BIGSERIAL    NOT NULL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
+    id          BIGSERIAL    NOT NULL PRIMARY KEY,
+    name        VARCHAR(255) NOT NULL,
+    color       VARCHAR(255),
+    type        VARCHAR(255),
+    description TEXT
 );
 
 
@@ -66,8 +69,17 @@ CREATE TABLE workshop_items
 ----------------------------------------------------------------
 CREATE TABLE workshop_item_additional_images
 (
-    workshop_item_id    BIGSERIAL NOT NULL,
-    image_name VARCHAR(255)
+    workshop_item_id BIGSERIAL    NOT NULL,
+    image_name       VARCHAR(255) NOT NULL
+);
+
+----------------------------------------------------------------
+-- PIVOT TAG SIMILAR NAME
+----------------------------------------------------------------
+CREATE TABLE tag_similar_names
+(
+    tag_id       BIGSERIAL    NOT NULL,
+    similar_name VARCHAR(255) NOT NULL
 );
 
 ----------------------------------------------------------------
@@ -84,8 +96,8 @@ CREATE TABLE role_user
 ----------------------------------------------------------------
 CREATE TABLE author_workshop_item
 (
-    author_id BIGINT NOT NULL REFERENCES authors (id) ON DELETE CASCADE,
-    workshop_item_id   BIGINT NOT NULL REFERENCES workshop_items (id) ON DELETE CASCADE
+    author_id        BIGINT NOT NULL REFERENCES authors (id) ON DELETE CASCADE,
+    workshop_item_id BIGINT NOT NULL REFERENCES workshop_items (id) ON DELETE CASCADE
 );
 
 ----------------------------------------------------------------
@@ -93,6 +105,6 @@ CREATE TABLE author_workshop_item
 ----------------------------------------------------------------
 CREATE TABLE tag_workshop_item
 (
-    tag_id  BIGINT NOT NULL REFERENCES tags (id) ON DELETE CASCADE,
+    tag_id           BIGINT NOT NULL REFERENCES tags (id) ON DELETE CASCADE,
     workshop_item_id BIGINT NOT NULL REFERENCES workshop_items (id) ON DELETE CASCADE
 );

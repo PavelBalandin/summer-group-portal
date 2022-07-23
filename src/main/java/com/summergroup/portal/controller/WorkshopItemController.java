@@ -38,7 +38,10 @@ public class WorkshopItemController {
             @RequestParam(defaultValue = "id") String sort,
             @RequestParam(defaultValue = "ASC") String order
     ) {
-        return new ResponseEntity<>(workshopItemService.getPaginatedByTags(tags, page, size, sort, order), HttpStatus.OK);
+        if (!tags.isEmpty()) {
+            return new ResponseEntity<>(workshopItemService.getPaginatedByTags(tags, page, size, sort, order), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(workshopItemService.getPaginated(page, size, sort, order), HttpStatus.OK);
     }
 
     @GetMapping("/name/{name}")

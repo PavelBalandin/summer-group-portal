@@ -11,6 +11,6 @@ import java.util.Optional;
 public interface WorkshopItemRepository extends JpaRepository<WorkshopItem, Long> {
     Optional<WorkshopItem> findByName(String name);
     Optional<WorkshopItem> findBySteamId(String id);
-    Page<WorkshopItem> findAllByTagsIdIn(List<Long> tags, Pageable pageable);
+    Page<WorkshopItem> findDistinctAllByTagsIdIn(List<Long> tags, Pageable pageable);
     Page<WorkshopItem> findByNameIgnoreCaseContaining(String name, Pageable pageable);
 }
