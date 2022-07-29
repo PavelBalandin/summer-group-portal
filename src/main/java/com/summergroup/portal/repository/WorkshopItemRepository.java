@@ -12,5 +12,6 @@ public interface WorkshopItemRepository extends JpaRepository<WorkshopItem, Long
     Optional<WorkshopItem> findByName(String name);
     Optional<WorkshopItem> findBySteamId(String id);
     Page<WorkshopItem> findDistinctAllByTagsIdIn(List<Long> tags, Pageable pageable);
+    Page<WorkshopItem> findAllByAuthorsIdIn(List<Long> ids, Pageable pageable);
     Page<WorkshopItem> findByNameIgnoreCaseContaining(String name, Pageable pageable);
 }

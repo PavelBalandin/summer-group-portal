@@ -28,6 +28,11 @@ public class AuthorController {
         return new ResponseEntity<>(authorService.getPaginated(page, size, sort, order), HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<AuthorDTO> getAuthorById(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(authorService.getAuthorById(id), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<AuthorDTO> create(@RequestBody AuthorDTO authorDTO) {
         return new ResponseEntity<>(authorService.create(authorDTO), HttpStatus.CREATED);

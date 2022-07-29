@@ -29,6 +29,12 @@ public class AuthorService {
         return authorPage.map(authorMapper::toDTO);
     }
 
+    public AuthorDTO getAuthorById(Long id) {
+        log.info("Getting author by id: {}", id);
+        Author author = authorRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        return authorMapper.toDTO(author);
+    }
+
     public AuthorDTO create(AuthorDTO authorDTO) {
         log.info("Creating author with name: {}", authorDTO.getName());
         Author author = authorRepository.save(authorMapper.toEntity(authorDTO));
@@ -62,5 +68,5 @@ public class AuthorService {
         Author authorFromDB = authorRepository.findByName(name).orElseThrow(ResourceNotFoundException::new);
         authorRepository.delete(authorFromDB);
     }
-    
+
 }

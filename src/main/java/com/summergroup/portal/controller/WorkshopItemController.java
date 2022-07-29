@@ -55,6 +55,17 @@ public class WorkshopItemController {
         return new ResponseEntity<>(workshopItemService.getPaginatedBySimilarName(name, page, size, sort, order), HttpStatus.OK);
     }
 
+    @GetMapping("/author/{id}")
+    public ResponseEntity<Page<WorkshopItemDTO>> getWorkshopItemsByAuthorId(
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "10") Integer size,
+            @RequestParam(defaultValue = "id") String sort,
+            @RequestParam(defaultValue = "ASC") String order,
+            @PathVariable("id") Long id
+    ) {
+        return new ResponseEntity<>(workshopItemService.getPaginatedByAuthorId(id, page, size, sort, order), HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<WorkshopItemDTO> getWorkshopItemById(@PathVariable("id") Long id) {
         return new ResponseEntity<>(workshopItemService.getById(id), HttpStatus.OK);

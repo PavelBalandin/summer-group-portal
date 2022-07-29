@@ -41,6 +41,12 @@ public class WorkshopItemService {
         return itemPage.map(workshopMapper::toDTO);
     }
 
+    public Page<WorkshopItemDTO> getPaginatedByAuthorId(Long id, Integer page, Integer size, String sort, String order) {
+        log.info("Getting page with items by author id");
+        Page<WorkshopItem> itemPage = workshopItemRepository.findAllByAuthorsIdIn(List.of(id), PageRequest.of(page, size, Sort.by(Sort.Direction.valueOf(order), sort)));
+        return itemPage.map(workshopMapper::toDTO);
+    }
+
     public Page<WorkshopItemDTO> getPaginatedBySimilarName(String name, int page, int size, String sort, String order) {
         log.info("Getting page with items by tags");
         Page<WorkshopItem> itemPage = workshopItemRepository.findByNameIgnoreCaseContaining(name, PageRequest.of(page, size, Sort.by(Sort.Direction.valueOf(order), sort)));
